@@ -1,53 +1,64 @@
 programa {
-// Algoritmo da Bisseção em portugol
-funçao calculo(float x){
-  float f
-  f =  (3 * (x ^ 2) - 7 * x + 2)
-  retorne f
+  inclua biblioteca Matematica
+
+// Algoritmo da Bisseção em Portugol
+
+funcao calculo(real x) {
+    real f
+    f = 3 * (x * x) - 7 * x + 2
+    retorne f
 }
 
-funçao bisseccao(float ai, float bi, float prec)
-{
-    int i ;
-    float fai, fbi, fai ,xi fxi, var
+funcao abs(real x) {
+        se (x >= 0) {
+            retorne x
+        } senao {
+            retorne -x
+        }
+    }
 
-    fai =  calculo(ai)
-    fbi =  calculo(bi)
-    xi  = (ai + bi)/2
-    fxi =  calculo(xi)
+funcao bisseccao(real ai, real bi, real prec) {
+    inteiro i
+    real fai, fbi, xi, fxi, aux, erro
     
-    i  = 1
-    escreva("\n***");
-    escreva("\ti\t\tai\t\tfai\t\tb\t\tfbi\t\txi\t\tfxi\t\terro\n")
-    escreva("\t\t\t\t\t\t\t\t\n", i, ai, fai, bi, fbi, xi, fxi)
+    fai = calculo(ai)
+    fbi = calculo(bi)
+    xi = (ai + bi) / 2
+    fxi = calculo(xi)
+
+    i = 1
+  
+    escreva("i\t\tai   \t\tfai\t\tbi\t\tfbi\t\txi\t\tfxi\t\terro\n")
+    escreva(i,"  ", ai,"     ", fai,"       ", bi,"       ", fbi,"      ", xi,"       ", fxi, "       -\n")
+    
     faca {
-         if (fxi * fai > 0) {
-            ai  = xi
+        se (fxi * fai > 0) {
+            ai = xi
             fai = fxi
-         } else {
-            bi  = xi
+        } senao {
+            bi = xi
             fbi = fxi
-         };
-         i    =  i + 1
-         aux  =  xi
-         xi   =   (ai + bi)/2
-         fxi  =  funcao(xi)
-         erro = (fabs(aux - xi))/(fabs(xi))
-         printf("\t\t\t\t\t\t\t\t\n", i, ai, fai, bi, fbi, xi, fxi, erro);       
-    } enquanto(erro >= prec);
+        }
+        i = i + 1
+        aux = xi
+        xi = (ai + bi) / 2
+        fxi = calculo(xi)
+        erro = abs(aux - xi) / abs(xi)
+        escreva(i,"  ", Matematica.arredondar(ai, 2),"   ", Matematica.arredondar(fai, 2),"   ", Matematica.arredondar(bi, 2),"    ", Matematica.arredondar(fbi,2),"   ", Matematica.arredondar(xi, 2),"    ", Matematica.arredondar(fxi, 2),  Matematica.arredondar(erro, 2), "\n")
+         
+    } enquanto (erro >= prec)
+    
     retorne xi
 }
 
-int main()
-{
-    float ai, bi 
-    float prec, ai, bi
+funcao inicio() {
+    real ai, bi, prec
 
-    prec =  0.01
-    ai   = 1
-    bi   =  4
-    printf ("\na raiz e %f", bisseccao(ai, bi, prec))
-            
+    prec = 0.01
+    ai = 1
+    bi = 4
+    escreva("\na raiz eh ", bisseccao(ai, bi, prec))
+
     retorne 0
 }
 }
